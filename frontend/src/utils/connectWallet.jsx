@@ -4,7 +4,7 @@ import { newKit } from "@celo/contractkit";
 
 export const connectWallet = async () => {
 	const kit = newKit(
-		"https://celo-mainnet.infura.io/v3/ae2f202881ba41fe828a2650f5a4f109"
+		process.env.NEXT_PUBLIC_CELO_URL
 	);
 
 	try {
