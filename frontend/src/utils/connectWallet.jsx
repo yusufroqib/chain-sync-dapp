@@ -14,6 +14,7 @@ export const connectWallet = async () => {
 			null,
 			null,
 		];
+		
 		if (window.ethereum === null) {
 			throw new Error("Metamask is not installed");
 		}

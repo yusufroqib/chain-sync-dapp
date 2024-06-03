@@ -1,5 +1,5 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
 	Popover,
 	PopoverContent,
@@ -19,18 +19,17 @@ const ConnectBtn = ({
 	chainId,
 	handleDisconnect,
 }) => {
+	const [currency, setCurrency] = useState("");
 
-	let currency 
-	if(window.ethereum) {
-		currency = 'CELO'
-	} else if (window.ethereum.isMinipay) {
-		currency = 'cUSD'
-	}	
-	
 	const handleCopy = () => {
 		navigator.clipboard.writeText(account);
 		toast.success("Copied to clipboard");
 	};
+
+	useEffect(() => {
+		setCurrency(window.ethereum.isMinipay ? "cUSD" : "CELO");
+	}, [balance, account]);
+
 	return (
 		<>
 			{!account || label === "Connecting..." ? (
@@ -41,15 +40,13 @@ const ConnectBtn = ({
 				>
 					{label}
 				</button>
-			) : 
-	
-			(
+			) : (
 				<Popover avoidCollisions>
 					<PopoverTrigger>
 						<div className="flex cursor-pointer items-center rounded-xl bg-gray-700 py-0">
 							{" "}
 							<div className="text-white px-3 text-sm md:text-lg ">
-								{balance > 0 ? balance.toFixed(3) : 0} { currency}
+								{balance > 0 ? balance.toFixed(3) : 0} {currency}
 							</div>
 							<div className="bg-gray-800 flex items-center gap-2 justify-center border border-transparent text-white m-[2px] rounded-xl p-2 text-sm md:text-lg">
 								<div>
@@ -62,7 +59,9 @@ const ConnectBtn = ({
 					</PopoverTrigger>
 					<PopoverContent className="flex justify-between">
 						<Button onClick={handleDisconnect}>Disconnect</Button>
-						<Button variant={'outline'} onClick={handleCopy}>Copy</Button>
+						<Button variant={"outline"} onClick={handleCopy}>
+							Copy
+						</Button>
 					</PopoverContent>
 				</Popover>
 			)}
