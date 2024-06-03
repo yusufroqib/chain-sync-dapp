@@ -14,7 +14,7 @@ export const connectWallet = async () => {
 			null,
 			null,
 		];
-		
+
 		if (window.ethereum === null) {
 			throw new Error("Metamask is not installed");
 		}
@@ -44,10 +44,10 @@ export const connectWallet = async () => {
 		const celoBalance = await celoToken.balanceOf(selectedAccount);
 		const stableBalance = await stableToken.balanceOf(selectedAccount);
 
-		if(window.ethereum) {
-			balance = celoBalance.toString() / 1e18
-		} else if (window.ethereum.isMinipay) {
+		if(window.ethereum && window.ethereum.isMinipay) {
 			balance = stableBalance.toString() / 1e18
+		} else if (window.ethereum) {
+			balance = celoBalance.toString() / 1e18
 		}
 
 
