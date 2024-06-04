@@ -48,7 +48,7 @@ const Wallet = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		if (!window.ethereum) {
+		if (!window.ethereum || !state.selectedAccount) {
 			router.push("/");
 			return;
 		}
