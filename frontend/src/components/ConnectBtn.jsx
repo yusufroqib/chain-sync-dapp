@@ -27,7 +27,7 @@ const ConnectBtn = ({
 	};
 
 	useEffect(() => {
-		setCurrency(window.ethereum.isMinipay ? "cUSD" : "CELO");
+		setCurrency(window.ethereum.isMiniPay ? "cUSD" : "CELO");
 	}, [balance, account]);
 
 	return (

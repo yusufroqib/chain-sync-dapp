@@ -44,7 +44,7 @@ export const connectWallet = async () => {
 		const celoBalance = await celoToken.balanceOf(selectedAccount);
 		const stableBalance = await stableToken.balanceOf(selectedAccount);
 
-		if(window.ethereum && window.ethereum.isMinipay) {
+		if(window.ethereum && window.ethereum.isMiniPay) {
 			balance = stableBalance.toString() / 1e18
 		} else if (window.ethereum) {
 			balance = celoBalance.toString() / 1e18
